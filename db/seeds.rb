@@ -13,3 +13,13 @@ Snack.destroy_all
 
 food_data = get_food_data()
 snack_data = get_snack_data()
+
+foods.each do |food|
+  Food.create!({
+    item_name:  food[:item_name],
+    taste:      food[:taste],
+    texture:    food[:texture],
+    amount:     food[:amount],
+    calories:   food[:calories]
+    })
+  end
