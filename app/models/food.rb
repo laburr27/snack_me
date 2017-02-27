@@ -1,3 +1,4 @@
 class Food < ApplicationRecord
-  belongs_to :snack
+  has_many :combos
+  has_many :snacks, through: :combos
 end

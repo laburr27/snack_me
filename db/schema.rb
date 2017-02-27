@@ -10,17 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227180010) do
+ActiveRecord::Schema.define(version: 20170227194333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "combos", force: :cascade do |t|
+    t.integer "food_id"
+    t.integer "snack_id"
+    t.index ["food_id"], name: "index_combos_on_food_id", using: :btree
+    t.index ["snack_id"], name: "index_combos_on_snack_id", using: :btree
+  end
+
   create_table "foods", force: :cascade do |t|
-    t.string  "item",     null: false
-    t.string  "taste",    null: false
-    t.string  "texture",  null: false
-    t.string  "amount",   null: false
-    t.integer "calories", null: false
+    t.string  "item_name", null: false
+    t.string  "taste",     null: false
+    t.string  "texture",   null: false
+    t.string  "amount",    null: false
+    t.integer "calories",  null: false
   end
 
   create_table "snacks", force: :cascade do |t|
@@ -35,4 +42,6 @@ ActiveRecord::Schema.define(version: 20170227180010) do
     t.string  "fav_taste"
   end
 
+  add_foreign_key "combos", "foods"
+  add_foreign_key "combos", "snacks"
 end
